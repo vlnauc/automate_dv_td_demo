@@ -1,15 +1,51 @@
 Welcome to your new dbt project!
 
-### Using the starter project
+#### Preparation of DBT project
 
-Try running the following commands:
-- dbt run
-- dbt test
+``` bash
+mkdir _demo
+cd _demo
+
+pip install virtualenv
+virtualenv venv
+
+venv/Scripts/activate.bat #activate virtual env in cmd
+
+#install dbt-core and dbt-teradata
+# https://github.com/Teradata/dbt-teradata
+
+pip install dbt-core>=1.8.0
+pip install dbt-teradata
+
+# craetion DBT project
+dbt init mandatum_demo
+
+#open project in vs code
+cd mandatum_demo
+code .
+```
+#### Installing GIT repositories (packages) to DBT project
+``` bash
+clone dbt-teradata
+cd dbt-teradata
+pip install -e .
+
+# cloning is optional, repos are in packages.yml
+git clone dbt-utils
+git clone dbt-teradata-utils
+git clone automate-dv
+git clone automate-dv-demo
+
+# add repos to package.yml in project as :
+dbt deps
+```
+#### Preparation of DB environment in Teradata Virtual Express Environment
+{{sql_scripts/01_Init_localhost.sql}}
+#### Preparation of DB environment in SnowFlake - registered free cloud
+{{sql_scripts/01_Init_snowflake.sql}}
 
 
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+#### Creation foreign tables (in teradata), snowflake has data already loaded
+``` bash
+dbt run-operation stage_external_sources
+```
