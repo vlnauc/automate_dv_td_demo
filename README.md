@@ -40,12 +40,27 @@ git clone automate-dv-demo
 dbt deps
 ```
 #### Preparation of DB environment in Teradata Virtual Express Environment
-{{sql_scripts/01_Init_localhost.sql}}
+[Init ClearScape SQL](sql_scripts/01_Init_clearscape.sql)
 #### Preparation of DB environment in SnowFlake - registered free cloud
-{{sql_scripts/01_Init_snowflake.sql}}
-
+[Init Teradata SQL](sql_scripts/01_Init_snowflake.sql)
 
 #### Creation foreign tables (in teradata), snowflake has data already loaded
 ``` bash
 dbt run-operation stage_external_sources
+```
+
+#### Execution
+- set variable load_date in dbt_project.yml
+execute
+``` bash
+dbt run
+```
+- for full refresh, its possible to execute
+``` bash
+dbt run --full-refresh
+```
+- for incremental run, execute
+``` bash
+py increment_load_date.py
+dbt run
 ```
