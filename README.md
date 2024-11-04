@@ -1,5 +1,3 @@
-Welcome to your new dbt project!
-
 #### Preparation of DBT project
 
 ``` bash
@@ -26,6 +24,10 @@ code .
 ```
 #### Installing GIT repositories (packages) to DBT project
 ``` bash
+#firstly uninstall dbt-teradata
+# installation from Python package was used to make project init easy
+pip uninstall dbt-teradata
+
 clone dbt-teradata
 cd dbt-teradata
 pip install -e .
