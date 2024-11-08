@@ -42,9 +42,9 @@ git clone automate-dv-demo
 dbt deps
 ```
 #### Preparation of DB environment in Teradata Virtual Express Environment
-[Init ClearScape SQL](sql_scripts/01_Init_clearscape.sql)
+[Init Teradata SQL](sql_scripts/01_Init_clearscape.sql)
 #### Preparation of DB environment in SnowFlake - registered free cloud
-[Init Teradata SQL](sql_scripts/01_Init_snowflake.sql)
+[Init Snowflake SQL](sql_scripts/01_Init_snowflake.sql)
 
 #### Creation foreign tables (in teradata), snowflake has data already loaded
 ``` bash

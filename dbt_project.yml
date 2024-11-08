@@ -63,6 +63,8 @@ models:
         +tags: 'link'
       sats:
         +tags: 'satellite'
+      ma_sat:
+        +tag: 'ma_satellite'
       t_links:
         +tags: 't_link'
 

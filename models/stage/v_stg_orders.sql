@@ -1,3 +1,9 @@
+{% if target.type == 'snowflake' %}
+  {% set END_DATE = "TO_DATE('9999-12-31')" %}
+{% elif target.type == 'teradata' %}
+  {% set END_DATE = "CAST('9999-12-31' AS DATE FORMAT 'YYYY-MM-DD')" %}
+{% endif %}
+
 {%- set yaml_metadata -%}
 source_model: 'raw_orders'
 derived_columns:
@@ -6,6 +12,8 @@ derived_columns:
   REGION_KEY: 'CUSTOMER_REGION_KEY'
   RECORD_SOURCE: '!TPCH-ORDERS'
   EFFECTIVE_FROM: 'ORDERDATE'
+  START_DATE: 'ORDERDATE'
+  END_DATE: {{ END_DATE }}
 hashed_columns:
   CUSTOMER_PK: 'CUSTOMER_KEY'
   LINK_CUSTOMER_NATION_PK:
@@ -116,7 +124,8 @@ hashed_columns:
                       ranked_columns=none) }}
 
   SELECT staging.*,
-        TO_DATE('{{ var('load_date') }}') AS LOAD_DATE
+        CAST('{{ var('load_date') }}' AS DATE FORMAT 'Y4-MM-DD') AS LOAD_DATE
+
   FROM staging
 
 {% endif %}

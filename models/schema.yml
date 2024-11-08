@@ -2,7 +2,6 @@ version: 2
 
 sources:
   - name: tpch_data_teradata
-    database: MANDATUM
     schema: TPCH_SF_1
     tables: 
       - name: raw_acq_lineitem
@@ -28,7 +27,6 @@ sources:
       - name: region
 
   - name: raw_data
-    database: MANDATUM
     schema: TPCH_SF_{{ var('tpch_size') }}
     tables:
       # depends on environment
