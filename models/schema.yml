@@ -3,6 +3,8 @@ version: 2
 models:
   # vault
   - name: control_snap_v0
+    data_tests:
+      - row_count_no_column
     columns:
       - name: sdts
         data_tests:
