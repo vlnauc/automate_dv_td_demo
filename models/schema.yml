@@ -4,7 +4,8 @@ models:
   # vault
   - name: control_snap_v0
     data_tests:
-      - row_count_no_column
+      #- row_count_no_column
+      - row_count
     columns:
       - name: sdts
         data_tests:

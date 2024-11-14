@@ -1,8 +1,13 @@
-{% test row_count(model, column_name) %}
+{% test row_count(model, column_name = none) %}
 
 with test_data as (
 
-    select count( {{ column_name }} ) as row_cnt
+    select 
+    {% if column_name %}
+        count( {{ column_name }} ) as row_cnt
+    {% else %}
+        count( 1 ) as row_cnt
+    {% endif %}
     from {{ model }}
 
 )
