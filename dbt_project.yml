@@ -57,22 +57,23 @@ models:
       +tags: 'stage'
       +enabled: true
 
-    datavault:
-      +schema: VAULT
-      +tags: 'datavault'
-
     raw_vault:
       +materialized: incremental
       +schema: VAULT
       +tags: 'raw_vault'
+      
+      control_snap:
+        +tags: 'control_snap'
+      eff_sat:
+        +tags: 'eff_sat'
       hubs:
         +tags: 'hub'
       links:
         +tags: 'link'
-      sats:
-        +tags: 'satellite'
       ma_sat:
         +tag: 'ma_satellite'
+      sats:
+        +tags: 'satellite'
       t_links:
         +tags: 't_link'
 
