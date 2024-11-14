@@ -20,7 +20,7 @@ log_logic:
 
 SELECT *
 FROM (
-    {{ automate_dv.control_snap_v1(control_snap_v0=metadata_dict.get('control_snap_v0'),
+    {{ teradata_automate_dv.control_snap_v1(control_snap_v0=metadata_dict.get('control_snap_v0'),
                                         log_logic=metadata_dict.get('log_logic')
                                         ) }}
 ) t

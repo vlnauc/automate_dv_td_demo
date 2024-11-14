@@ -8,7 +8,10 @@ packages:
   #- git: "https://github.com/vlnauc/dbt-teradata-utils.git"
   #  revision: "main"
 
-  - local: "c:/Users/vn250013/OneDrive - Teradata/__WORK__/08_Mandatum/GIT/automate-dv"
+  - package: Datavault-UK/automate_dv
+    version: 0.11.0
+
+  - local: "c:/Users/vn250013/OneDrive - Teradata/__WORK__/08_Mandatum/GIT/teradata-automate-dv"
   #- git: "https://github.com/vlnauc/automate-dv.git"
   #  revision: "develop"
 

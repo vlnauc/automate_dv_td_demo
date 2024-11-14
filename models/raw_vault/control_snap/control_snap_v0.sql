@@ -9,6 +9,6 @@ daily_snapshot_time: '07:30:00'
 
 SELECT *
 FROM (
-    {{ automate_dv.control_snap_v0(start_date=metadata_dict.get('start_date'),
+    {{ teradata_automate_dv.control_snap_v0(start_date=metadata_dict.get('start_date'),
                             daily_snapshot_time=metadata_dict.get('daily_snapshot_time')) }}
 ) t

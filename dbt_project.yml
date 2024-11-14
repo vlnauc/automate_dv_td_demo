@@ -12,6 +12,8 @@ profile: 'mandatum_demo'
 dispatch:
   - macro_namespace: dbt_utils
     search_order: ['teradata_utils', 'dbt_utils']
+  - macro_namespace: automate_dv
+    search_order: ['teradata_automate_dv', 'automate_dv']
 
 # These configurations specify where dbt should look for different types of files.
 # The `model-paths` config, for example, states that models in this project can be
