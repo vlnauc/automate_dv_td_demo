@@ -1,55 +1,266 @@
 version: 2
 
-sources:
-  - name: tpch_data_teradata
-    schema: TPCH_SF_1
-    tables: 
-      - name: raw_acq_lineitem
-      - name: raw_acq_customer
-      - name: raw_acq_orders
-      - name: raw_acq_partsupp
-      - name: raw_acq_supplier
-      - name: raw_acq_part
-      - name: raw_acq_nation
-      - name: raw_acq_region
+models:
+  # vault
+  - name: control_snap_v0
+    columns:
+      - name: sdts
+        data_tests:
+          - row_count
 
-  - name: tpch_data_snowflake
-    database: SNOWFLAKE_SAMPLE_DATA
-    schema: TPCH_SF{{ var('tpch_size') }}
-    tables: 
-      - name: lineitem
-      - name: customer
-      - name: orders
-      - name: partsupp
-      - name: supplier
-      - name: part
-      - name: nation
-      - name: region
+  - name: control_snap_v1
+    columns:
+      - name: sdts
+        data_tests:
+          - row_count
 
-  - name: raw_data
-    schema: TPCH_SF_{{ var('tpch_size') }}
-    tables:
-      # depends on environment
-      - name: raw_lineitem
-        identifier: raw_lnd_lineitem
+  # raw_landing
+  - name: raw_lnd_customer
+    columns: 
+      - name: c_custkey
+        data_tests:
+          - row_count
 
-      - name: raw_customer
-        identifier: raw_lnd_customer
+  - name: raw_lnd_lineitem
+    columns: 
+      - name: l_orderkey
+        data_tests:
+          - row_count
 
-      - name: raw_orders
-        identifier: raw_lnd_orders
+  - name: raw_lnd_nation
+    columns:
+      - name: n_nationkey
+        data_tests:
+          - row_count
 
-      - name: raw_partsupp
-        identifier: raw_lnd_partsupp
+  - name: raw_lnd_orders
+    columns:
+      - name: o_orderkey
+        data_tests:
+          - row_count
 
-      - name: raw_supplier
-        identifier: raw_lnd_supplier
+  - name: raw_lnd_part
+    columns:
+      - name: p_partkey
+        data_tests:
+          - row_count
 
-      - name: raw_part
-        identifier: raw_lnd_part
+  - name: raw_lnd_partsupp
+    columns:
+      - name: ps_partkey
+        data_tests:
+          - row_count
 
-      - name: raw_nation
-        identifier: raw_lnd_nation
+  - name: raw_lnd_region
+    columns:
+      - name: r_regionkey
+        data_tests:
+          - row_count
 
-      - name: raw_region
-        identifier: raw_lnd_region
+  - name: raw_lnd_supplier
+    columns:
+      - name: s_suppkey
+        data_tests:
+          - row_count
+
+  # raw_stage
+  - name: raw_inventory
+    columns:
+      - name: PARTKEY
+        data_tests:
+          - row_count
+
+  - name: raw_orders
+    columns:
+      - name: ORDERKEY
+        data_tests:
+          - row_count
+
+  - name: raw_transactions
+    columns:
+      - name: ORDER_ID
+        data_tests:
+          - row_count
+
+  # raw_vault
+  # eff_sat
+  - name: eff_sat_customer_nation
+    columns: 
+      - name: CUSTOMER_NATION_KEY
+        data_tests:
+          - row_count
+  # t_links
+  - name: t_link_transactions 
+    columns: 
+      - name: TRANSACTION_PK
+        data_tests:
+          - row_count
+  # sats
+  - name: sat_order_order_details 
+    columns: 
+      - name: ORDER_PK
+        data_tests:
+          - row_count
+
+  - name: sat_order_lineitem_details 
+    columns: 
+      - name: LINEITEM_PK
+        data_tests:
+          - row_count
+
+  - name: sat_order_customer_details 
+    columns: 
+      - name: CUSTOMER_PK
+        data_tests:
+          - row_count
+
+  - name: sat_order_cust_region_details 
+    columns: 
+      - name: CUSTOMER_PK
+        data_tests:
+          - row_count
+
+  - name: sat_order_cust_nation_details 
+    columns: 
+      - name: CUSTOMER_PK
+        data_tests:
+          - row_count
+
+  - name: sat_inv_supplier_details 
+    columns: 
+      - name: SUPPLIER_PK
+        data_tests:
+          - row_count
+
+  - name: sat_inv_supp_region_details 
+    columns: 
+      - name: SUPPLIER_PK
+        data_tests:
+          - row_count
+
+  - name: sat_inv_supp_nation_details 
+    columns: 
+      - name: SUPPLIER_PK
+        data_tests:
+          - row_count
+
+  - name: sat_inv_part_details 
+    columns: 
+      - name: PART_PK
+        data_tests:
+          - row_count
+
+  - name: sat_inv_inventory_details 
+    columns: 
+      - name: INVENTORY_PK
+        data_tests:
+          - row_count
+  # ma_sat
+  - name: ma_sat_customer_detail 
+    columns: 
+      - name: CUSTOMER_PK
+        data_tests:
+          - row_count
+  # links
+  - name: link_supplier_nation 
+    columns: 
+      - name: LINK_SUPPLIER_NATION_PK
+        data_tests:
+          - row_count
+
+  - name: link_order_lineitem 
+    columns: 
+      - name:  LINK_LINEITEM_ORDER_PK
+        data_tests:
+          - row_count
+
+  - name: link_nation_region 
+    columns: 
+      - name:  NATION_REGION_PK
+        data_tests:
+          - row_count
+
+  - name: link_inventory 
+    columns: 
+      - name:  INVENTORY_PK
+        data_tests:
+          - row_count
+
+  - name: link_inventory_allocation 
+    columns: 
+      - name:  INVENTORY_ALLOCATION_PK
+        data_tests:
+          - row_count
+
+  - name: link_customer_order 
+    columns: 
+      - name:  ORDER_CUSTOMER_PK
+        data_tests:
+          - row_count
+
+  - name: link_customer_nation 
+    columns: 
+      - name:  LINK_CUSTOMER_NATION_PK
+        data_tests:
+          - row_count
+  # hubs
+  - name: hub_supplier 
+    columns: 
+      - name:  SUPPLIER_PK
+        data_tests:
+          - row_count
+
+  - name: hub_region 
+    columns: 
+      - name:  REGION_PK
+        data_tests:
+          - row_count
+
+  - name: hub_part 
+    columns: 
+      - name:  PART_PK
+        data_tests:
+          - row_count
+
+  - name: hub_order 
+    columns: 
+      - name:  ORDER_PK
+        data_tests:
+          - row_count
+
+  - name: hub_nation 
+    columns: 
+      - name:  NATION_PK
+        data_tests:
+          - row_count
+
+  - name: hub_lineitem 
+    columns: 
+      - name:  LINEITEM_PK
+        data_tests:
+          - row_count
+
+  - name: hub_customer
+    columns: 
+      - name:  CUSTOMER_PK
+        data_tests:
+          - row_count
+
+  # stage
+  - name: v_stg_inventory
+    columns:
+      - name: PARTKEY
+        data_tests:
+          - row_count
+
+  - name: v_stg_orders
+    columns:
+      - name: ORDERKEY
+        data_tests:
+          - row_count
+
+  - name: v_stg_transactions
+    columns:
+      - name: ORDER_ID
+        data_tests:
+          - row_count

@@ -9,6 +9,10 @@ require-dbt-version: ['>=1.0.0', '<2.0.0']
 # This setting configures which "profile" dbt uses for this project.
 profile: 'mandatum_demo'
 
+dispatch:
+  - macro_namespace: dbt_utils
+    search_order: ['teradata_utils', 'dbt_utils']
+
 # These configurations specify where dbt should look for different types of files.
 # The `model-paths` config, for example, states that models in this project can be
 # found in the "models/" directory. You probably won't need to change these!
@@ -52,6 +56,10 @@ models:
       +schema: STG
       +tags: 'stage'
       +enabled: true
+
+    datavault:
+      +schema: VAULT
+      +tags: 'datavault'
 
     raw_vault:
       +materialized: incremental
