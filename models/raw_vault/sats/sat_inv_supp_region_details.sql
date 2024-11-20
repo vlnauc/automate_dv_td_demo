@@ -1,7 +1,7 @@
 {%- set source_model = "v_stg_inventory" -%}
 {%- set src_pk = "SUPPLIER_PK" -%}
-{%- set src_hashdiff = "SUPPLIER_NATION_HASHDIFF" -%}
-{%- set src_payload = ["SUPPLIER_NATION_NAME", "SUPPLIER_NATION_COMMENT"] -%}
+{%- set src_hashdiff = "SUPPLIER_REGION_HASHDIFF" -%}
+{%- set src_payload = ["SUPPLIER_REGION_NAME", "SUPPLIER_REGION_COMMENT"] -%}
 {%- set src_eff = "EFFECTIVE_FROM" -%}
 {%- set src_ldts = "LOAD_DATE" -%}
 {%- set src_source = "RECORD_SOURCE" -%}
