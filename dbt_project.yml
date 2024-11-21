@@ -64,6 +64,8 @@ models:
       +schema: VAULT
       +tags: 'raw_vault'
       
+      as-of-date:
+        +tag: 'date'
       control_snap:
         +tags: 'control_snap'
       eff_sat:
@@ -74,10 +76,14 @@ models:
         +tags: 'link'
       ma_sat:
         +tag: 'ma_satellite'
+      ref:
+        +tag: 'ref'
       sats:
         +tags: 'satellite'
       t_links:
         +tags: 't_link'
+      xts:
+        +tags: 'xts'
 
 # for direct loading of test data to TD Vantage Express
 # in ClearScape used S3 10G data
@@ -90,6 +96,8 @@ seeds:
         index: PRIMARY INDEX (C_CUSTKEY)
       raw_acq_lineitem:
         index: PRIMARY INDEX (L_ORDERKEY)
+      raw_acq_login:
+        index: PRIMARY INDEX (L_USERKEY)
       raw_acq_nation:
         index: PRIMARY INDEX (N_NATIONKEY)
       raw_acq_orders:

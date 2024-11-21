@@ -5,6 +5,7 @@ sources:
     schema: TPCH_SF_1
     tables:
       - name: raw_acq_lineitem
+      - name: raw_acq_login
       - name: raw_acq_customer
       - name: raw_acq_orders
       - name: raw_acq_partsupp
@@ -26,12 +27,16 @@ sources:
       - name: nation
       - name: region
 
+  #raw landing
   - name: raw_data
     schema: TPCH_SF_{{ var('tpch_size') }}
     tables:
       # depends on environment
       - name: raw_lineitem
         identifier: raw_lnd_lineitem
+
+      - name: raw_login
+        identifier: raw_lnd_login
 
       - name: raw_customer
         identifier: raw_lnd_customer

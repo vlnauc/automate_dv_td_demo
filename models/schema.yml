@@ -267,3 +267,12 @@ models:
       - name: ORDER_ID
         data_tests:
           - row_count
+  
+  #xts
+  - name: xts_inventory
+    data_tests:
+      - row_count
+
+  - name: xts_supp_details
+    data_tests:
+      - row_count
